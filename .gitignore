@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-firefox
+*.zip
+.DS_Store
+*.local
+.env
+.vite
+coverage
+playwright-report
+test-results
+
+# Store listing copy — drafting notes, not part of the public repo
+STORE_LISTING.md

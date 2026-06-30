@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/mascot.webp" alt="Birdview mascot — a cat with wings" width="130" />
+
 # 🐦 Birdview
 
 ### A local-first visual productivity dashboard for your browser

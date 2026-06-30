@@ -10,5 +10,6 @@ coverage
 playwright-report
 test-results
 
-# Store listing copy — drafting notes, not part of the public repo
+# Store listing copy + generated marketing assets — not part of the public repo
 STORE_LISTING.md
+store-assets/

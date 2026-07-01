@@ -6,7 +6,6 @@ import { useStore } from '@/services/store';
 import { DashboardCard } from '@/components/DashboardCard';
 import { SortableList } from '@/components/SortableList';
 import { Input, ProgressBar, EmptyState } from '@/components/ui';
-import { Menu } from '@/components/Menu';
 import { confirm } from '@/components/ConfirmDialog';
 import { cn } from '@/utils/cn';
 import type { ModuleCardProps } from '../types';
@@ -41,21 +40,9 @@ export function CustomCardView({ card, ...props }: ModuleCardProps & { card: Cus
       {...props}
       title={card.title}
       onTitleChange={(title) => patch({ title: title || 'Untitled' })}
+      onDelete={deleteCard}
       icon={<LayoutList size={16} />}
       count={items.filter((i) => !i.done).length}
-      headerAction={
-        <Menu
-          trigger={
-            <button
-              className="rounded-lg p-1 text-muted hover:bg-surface-2 hover:text-fg"
-              aria-label="Custom card options"
-            >
-              <Trash2 size={14} />
-            </button>
-          }
-          items={[{ label: 'Delete card', icon: <Trash2 size={14} />, onClick: deleteCard, danger: true }]}
-        />
-      }
     >
       {items.length > 0 && <ProgressBar value={progress} className="mb-3" />}
 

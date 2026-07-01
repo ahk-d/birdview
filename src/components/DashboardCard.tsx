@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { ChevronDown, GripVertical, Pin, EyeOff, MoreHorizontal } from 'lucide-react';
+import { ChevronDown, GripVertical, Pin, EyeOff, MoreHorizontal, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Menu } from './Menu';
 import { InlineEdit } from './InlineEdit';
@@ -20,6 +20,8 @@ export interface DashboardCardProps {
   onHide: () => void;
   /** When provided, the header title becomes click-to-edit (used by custom cards). */
   onTitleChange?: (next: string) => void;
+  /** When provided, the menu offers a permanent "Delete card" instead of reversible "Remove card". */
+  onDelete?: () => void;
   headerAction?: ReactNode;
   children: ReactNode;
 }
@@ -37,6 +39,7 @@ export function DashboardCard({
   onTogglePin,
   onHide,
   onTitleChange,
+  onDelete,
   headerAction,
   children,
 }: DashboardCardProps) {
@@ -124,7 +127,10 @@ export function DashboardCard({
               onClick: onToggleCollapse,
             },
             'divider',
-            { label: 'Hide card', icon: <EyeOff size={14} />, onClick: onHide },
+            // Custom cards delete permanently; built-in cards are removed reversibly (data kept).
+            onDelete
+              ? { label: 'Delete card', icon: <Trash2 size={14} />, onClick: onDelete, danger: true }
+              : { label: 'Remove card', icon: <EyeOff size={14} />, onClick: onHide },
           ]}
         />
       </header>

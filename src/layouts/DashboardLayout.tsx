@@ -9,14 +9,12 @@ import {
   type DragEndEvent,
 } from '@dnd-kit/core';
 import { SortableContext, sortableKeyboardCoordinates, rectSortingStrategy, arrayMove } from '@dnd-kit/sortable';
-import { Plus, LayoutList } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useSettings, useStore } from '@/services/store';
 import { MODULE_REGISTRY } from '@/features/registry';
 import { CustomCardView, addCustomCard } from '@/features/custom/CustomCardView';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { Menu } from '@/components/Menu';
 import { MODULE_LABELS } from '@/storage/schema';
-import type { ModuleKey } from '@/types';
 import { focusModule } from '@/services/ui';
 
 /**
@@ -64,14 +62,6 @@ export function DashboardLayout() {
     focusModule(id);
   };
 
-  const restoreBuiltin = (key: string) => {
-    patchCard(key, { hidden: false });
-    focusModule(key);
-  };
-
-  // Built-in modules the user has removed — offered for re-adding from the "Add card" menu.
-  const removedBuiltins = settings.layout.filter((l) => l.hidden && l.key in MODULE_REGISTRY);
-
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
       <SortableContext items={visible.map((l) => l.key)} strategy={rectSortingStrategy}>
@@ -106,25 +96,13 @@ export function DashboardLayout() {
             );
           })}
 
-          <Menu
-            trigger={
-              <button
-                className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-surface/40 py-4 text-sm font-medium text-muted transition-colors hover:border-accent/50 hover:text-accent"
-                aria-label="Add a new card"
-              >
-                <Plus size={16} /> Add card
-              </button>
-            }
-            items={[
-              { label: 'New custom card', icon: <Plus size={14} />, onClick: onAddCard },
-              ...(removedBuiltins.length ? (['divider'] as const) : []),
-              ...removedBuiltins.map((l) => ({
-                label: `Add ${MODULE_LABELS[l.key as ModuleKey]}`,
-                icon: <LayoutList size={14} />,
-                onClick: () => restoreBuiltin(l.key),
-              })),
-            ]}
-          />
+          <button
+            onClick={onAddCard}
+            className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-surface/40 py-4 text-sm font-medium text-muted transition-colors hover:border-accent/50 hover:text-accent"
+            aria-label="Add a new card"
+          >
+            <Plus size={16} /> Add card
+          </button>
         </div>
       </SortableContext>
     </DndContext>

@@ -1,7 +1,7 @@
 {
   "name": "birdview",
-  "version": "1.0.0",
-  "description": "Birdview — a local-first visual productivity dashboard browser extension (Chrome, Edge, Brave, Arc, Opera, Firefox / MV3).",
+  "version": "1.0.1",
+  "description": "A fast, private, local-first productivity dashboard for tasks, projects, jobs, notes and screenshots — right in your new tab.",
   "license": "MIT",
   "type": "module",
   "author": "ahk-d",

@@ -4,7 +4,8 @@ import { MODULE_LABELS } from '@/storage/schema';
 
 export interface SearchHit {
   id: string;
-  module: ModuleKey;
+  /** A built-in ModuleKey or a custom card id — used to focus the right card. */
+  module: string;
   moduleLabel: string;
   title: string;
   subtitle?: string;
@@ -34,6 +35,14 @@ export function buildSearchIndex(db: Database): SearchHit[] {
   db.instagramPosts.forEach((p) => push('instagramPosts', p.id, p.title, p.caption));
   db.screenshots.forEach((s) => push('screenshots', s.id, s.filename, undefined, s.ocrText));
   db.calendar.forEach((e) => push('calendar', e.id, e.title, e.location));
+
+  // Custom (user-created) cards + their items.
+  db.customCards.forEach((c) => {
+    hits.push({ id: c.id, module: c.id, moduleLabel: c.title, title: c.title });
+    c.items.forEach((it) =>
+      hits.push({ id: it.id, module: c.id, moduleLabel: c.title, title: it.text || '(untitled)' }),
+    );
+  });
 
   return hits;
 }

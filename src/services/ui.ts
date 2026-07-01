@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import type { ModuleKey } from '@/types';
 import { useStore } from './store';
 
 interface UIState {
@@ -12,8 +11,9 @@ export const useUI = create<UIState>((set) => ({
   setPalette: (paletteOpen) => set({ paletteOpen }),
 }));
 
-/** Make a module's card visible (un-hide, expand) and scroll it into view with a brief highlight. */
-export function focusModule(key: ModuleKey): void {
+/** Make a card visible (un-hide, expand) and scroll it into view with a brief highlight. Accepts a
+ * built-in ModuleKey or a custom-card id. */
+export function focusModule(key: string): void {
   const { db, setSettings } = useStore.getState();
   const layout = db.settings.layout.map((l) =>
     l.key === key ? { ...l, hidden: false, collapsed: false } : l,

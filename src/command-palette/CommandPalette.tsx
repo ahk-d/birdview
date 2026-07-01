@@ -12,6 +12,7 @@ import {
   Package,
   FileText,
   Eye,
+  LayoutList,
   CornerDownLeft,
 } from 'lucide-react';
 import type { ModuleKey } from '@/types';
@@ -21,6 +22,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { useDebounce } from '@/hooks/useDebounce';
 import { searchDatabase, type SearchHit } from '@/services/search';
 import { runExport } from '@/services/export';
+import { addCustomCard } from '@/features/custom/CustomCardView';
 import { toast } from '@/components/Toast';
 import { cn } from '@/utils/cn';
 import { MODULE_ORDER } from '@/storage/schema';
@@ -56,6 +58,7 @@ export function CommandPalette({ onOpenSettings }: { onOpenSettings: () => void 
       { id: 'new-project', label: 'New project', icon: <FolderKanban size={16} />, run: () => { add('projects', { title: 'New project', column: 'backlog', subtasks: [], links: [], attachments: [] } as never); focusModule('projects'); } },
       { id: 'new-job', label: 'New job', icon: <Briefcase size={16} />, run: () => { add('jobs', { company: 'New company', role: '', status: 'Saved' } as never); focusModule('jobs'); } },
       { id: 'new-urgent', label: 'New urgent item', icon: <Flame size={16} />, run: () => { add('urgent', { title: 'Urgent', done: false } as never); focusModule('urgent'); } },
+      { id: 'new-card', label: 'New custom card', icon: <LayoutList size={16} />, run: () => { const id = addCustomCard(); focusModule(id); } },
       { id: 'theme', label: 'Toggle theme', icon: <Moon size={16} />, run: () => cycle() },
       { id: 'settings', label: 'Open settings', icon: <SettingsIcon size={16} />, run: () => onOpenSettings() },
       { id: 'export-json', label: 'Export workspace (JSON)', icon: <Download size={16} />, run: () => { void runExport('json', db); toast.success('Exported JSON'); } },

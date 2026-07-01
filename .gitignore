@@ -13,3 +13,6 @@ test-results
 # Store listing copy + generated marketing assets — not part of the public repo
 STORE_LISTING.md
 store-assets/
+
+# TypeScript incremental build cache
+*.tsbuildinfo

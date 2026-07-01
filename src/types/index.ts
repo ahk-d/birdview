@@ -230,9 +230,23 @@ export interface CalendarEvent extends BaseRecord {
 // ── Settings ─────────────────────────────────────────────────────────────────
 export type ThemeMode = 'light' | 'dark' | 'system';
 
+// ── Custom cards ─────────────────────────────────────────────────────────────
+export interface CustomCardItem {
+  id: ID;
+  text: string;
+  done: boolean;
+}
+
+/** A user-created card/category — a simple named checklist that lives on the dashboard. */
+export interface CustomCard extends BaseRecord {
+  title: string;
+  items: CustomCardItem[];
+  order: number;
+}
+
 export interface CardLayout {
-  /** Module key, e.g. 'tasks'. */
-  key: ModuleKey;
+  /** A built-in ModuleKey (e.g. 'tasks') or a custom card id. */
+  key: string;
   order: number;
   collapsed: boolean;
   hidden: boolean;
@@ -264,6 +278,7 @@ export interface Database {
   urgent: UrgentItem[];
   screenshots: Screenshot[];
   calendar: CalendarEvent[];
+  customCards: CustomCard[];
   settings: Settings;
 }
 

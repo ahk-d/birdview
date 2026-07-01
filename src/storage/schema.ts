@@ -68,6 +68,7 @@ export function emptyDatabase(): Database {
     urgent: [],
     screenshots: [],
     calendar: [],
+    customCards: [],
     settings: defaultSettings(),
   };
 }

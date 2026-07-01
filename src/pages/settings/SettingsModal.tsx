@@ -28,7 +28,13 @@ function bytes(n: number): string {
 export function SettingsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const settings = useSettings();
   const setSettings = useStore((s) => s.setSettings);
+  const customCards = useStore((s) => s.db.customCards);
   const [usage, setUsage] = useState(0);
+
+  const cardLabel = (key: string) =>
+    (MODULE_LABELS as Record<string, string>)[key] ??
+    customCards.find((c) => c.id === key)?.title ??
+    'Custom card';
 
   useEffect(() => {
     if (open) estimateImageBytes().then(setUsage);
@@ -105,7 +111,7 @@ export function SettingsModal({ open, onClose }: { open: boolean; onClose: () =>
                   }
                   className="accent-[rgb(var(--accent))]"
                 />
-                {MODULE_LABELS[l.key]}
+                {cardLabel(l.key)}
               </label>
             ))}
           </div>

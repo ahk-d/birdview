@@ -256,6 +256,8 @@ export interface CardLayout {
 export interface Settings {
   theme: ThemeMode;
   notificationsEnabled: boolean;
+  /** Play a short chime with in-app reminder toasts. */
+  soundEnabled: boolean;
   backupFrequency: 'off' | 'daily' | 'weekly';
   lastBackupAt?: ISODate;
   exportDefault: 'json' | 'markdown' | 'csv' | 'zip';

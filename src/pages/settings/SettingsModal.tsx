@@ -5,6 +5,7 @@ import { Button } from '@/components/ui';
 import { useStore, useSettings } from '@/services/store';
 import { defaultLayout, MODULE_LABELS } from '@/storage/schema';
 import { estimateImageBytes } from '@/storage/images';
+import { playChime } from '@/services/sound';
 import { confirm } from '@/components/ConfirmDialog';
 import { toast } from '@/components/Toast';
 
@@ -62,6 +63,18 @@ export function SettingsModal({ open, onClose }: { open: boolean; onClose: () =>
         <Section title="Reminders & backups">
           <Field label="Notifications">
             <Toggle checked={settings.notificationsEnabled} onChange={(v) => set({ notificationsEnabled: v })} />
+          </Field>
+          <Field label="Notification sound">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => playChime()}
+                className="text-xs font-medium text-accent hover:underline"
+                type="button"
+              >
+                Test
+              </button>
+              <Toggle checked={settings.soundEnabled} onChange={(v) => set({ soundEnabled: v })} />
+            </div>
           </Field>
           <Field label="Auto-backup">
             <select

@@ -3,6 +3,7 @@ import { useStore } from '@/services/store';
 import { useUI, focusModule } from '@/services/ui';
 import { useTheme } from '@/hooks/useTheme';
 import { useHotkeys } from '@/hooks/useHotkeys';
+import { useReminders } from '@/hooks/useReminders';
 import { TopBar } from '@/components/TopBar';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import { CommandPalette } from '@/command-palette/CommandPalette';
@@ -20,6 +21,7 @@ export function Dashboard() {
   const { add, undo, redo } = useStore();
   const setPalette = useUI((s) => s.setPalette);
   useTheme();
+  useReminders();
 
   const [capture, setCapture] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);

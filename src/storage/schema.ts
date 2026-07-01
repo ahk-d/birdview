@@ -46,6 +46,7 @@ export function defaultSettings(): Settings {
   return {
     theme: 'system',
     notificationsEnabled: true,
+    soundEnabled: true,
     backupFrequency: 'weekly',
     exportDefault: 'json',
     layout: defaultLayout(),

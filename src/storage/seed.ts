@@ -111,5 +111,10 @@ export function seedDatabase(db: Database): void {
     { ...base(), title: 'Dentist', start: iso(3, 11), allDay: false, tags: ['personal'] },
   ];
 
+  db.links = [
+    { ...base(), title: 'GitHub', url: 'https://github.com/', order: 0, tags: ['work'] },
+    { ...base(), title: 'Gmail', url: 'https://mail.google.com/', order: 1, tags: ['personal'] },
+  ];
+
   db.settings.onboarded = true;
 }

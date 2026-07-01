@@ -13,6 +13,7 @@ export const MODULE_ORDER: ModuleKey[] = [
   'instagram',
   'linkedinPosts',
   'instagramPosts',
+  'links',
   'screenshots',
   'calendar',
 ];
@@ -28,6 +29,7 @@ export const MODULE_LABELS: Record<ModuleKey, string> = {
   instagram: 'Instagram Ideas',
   linkedinPosts: 'LinkedIn Posts',
   instagramPosts: 'Instagram Posts',
+  links: 'Quick Links',
   screenshots: 'Screenshots',
   calendar: 'Calendar',
 };
@@ -69,6 +71,7 @@ export function emptyDatabase(): Database {
     urgent: [],
     screenshots: [],
     calendar: [],
+    links: [],
     customCards: [],
     settings: defaultSettings(),
   };

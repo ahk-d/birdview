@@ -35,6 +35,7 @@ export function buildSearchIndex(db: Database): SearchHit[] {
   db.instagramPosts.forEach((p) => push('instagramPosts', p.id, p.title, p.caption));
   db.screenshots.forEach((s) => push('screenshots', s.id, s.filename, undefined, s.ocrText));
   db.calendar.forEach((e) => push('calendar', e.id, e.title, e.location));
+  db.links.forEach((l) => push('links', l.id, l.title, l.url));
 
   // Custom (user-created) cards + their items.
   db.customCards.forEach((c) => {

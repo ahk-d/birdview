@@ -13,6 +13,7 @@ import { LinkedInPostsCard } from './linkedin-posts/LinkedInPostsCard';
 import { InstagramPostsCard } from './instagram-posts/InstagramPostsCard';
 import { ScreenshotsCard } from './screenshots/ScreenshotsCard';
 import { CalendarCard } from './calendar/CalendarCard';
+import { LinksCard } from './links/LinksCard';
 
 /** Maps each dashboard module to its card component. */
 export const MODULE_REGISTRY: Record<ModuleKey, FC<ModuleCardProps>> = {
@@ -28,4 +29,5 @@ export const MODULE_REGISTRY: Record<ModuleKey, FC<ModuleCardProps>> = {
   instagramPosts: InstagramPostsCard,
   screenshots: ScreenshotsCard,
   calendar: CalendarCard,
+  links: LinksCard,
 };

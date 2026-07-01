@@ -244,6 +244,13 @@ export interface CustomCard extends BaseRecord {
   order: number;
 }
 
+/** A saved quick link — a labelled, clickable URL. */
+export interface LinkItem extends BaseRecord {
+  title: string;
+  url: string;
+  order: number;
+}
+
 export interface CardLayout {
   /** A built-in ModuleKey (e.g. 'tasks') or a custom card id. */
   key: string;
@@ -280,6 +287,7 @@ export interface Database {
   urgent: UrgentItem[];
   screenshots: Screenshot[];
   calendar: CalendarEvent[];
+  links: LinkItem[];
   customCards: CustomCard[];
   settings: Settings;
 }
@@ -300,4 +308,5 @@ export type ModuleKey =
   | 'instagramPosts'
   | 'recurring'
   | 'screenshots'
-  | 'calendar';
+  | 'calendar'
+  | 'links';

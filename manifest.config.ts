@@ -55,6 +55,8 @@ export default defineManifest(() => ({
             // Required by AMO: Birdview collects/transmits no user data.
             data_collection_permissions: { required: ['none'] },
           },
+          // Declare Firefox for Android support (responsive dashboard works on mobile).
+          gecko_android: { strict_min_version: '126.0' },
         },
       } as any)
     : {}),

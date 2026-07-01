@@ -46,10 +46,16 @@ export default defineManifest(() => ({
     },
   },
   ...(isFirefox
-    ? {
+    ? ({
         browser_specific_settings: {
-          gecko: { id: 'birdview@portfolio.dev', strict_min_version: '121.0' },
+          gecko: {
+            id: 'birdview@portfolio.dev',
+            // 126 is the first version supporting options_page under MV3 (clears AMO warnings).
+            strict_min_version: '126.0',
+            // Required by AMO: Birdview collects/transmits no user data.
+            data_collection_permissions: { required: ['none'] },
+          },
         },
-      }
+      } as any)
     : {}),
 }));

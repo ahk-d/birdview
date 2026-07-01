@@ -4,6 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { ChevronDown, GripVertical, Pin, EyeOff, MoreHorizontal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Menu } from './Menu';
+import { InlineEdit } from './InlineEdit';
 import { cn } from '@/utils/cn';
 
 export interface DashboardCardProps {
@@ -17,6 +18,8 @@ export interface DashboardCardProps {
   onToggleCollapse: () => void;
   onTogglePin: () => void;
   onHide: () => void;
+  /** When provided, the header title becomes click-to-edit (used by custom cards). */
+  onTitleChange?: (next: string) => void;
   headerAction?: ReactNode;
   children: ReactNode;
 }
@@ -33,6 +36,7 @@ export function DashboardCard({
   onToggleCollapse,
   onTogglePin,
   onHide,
+  onTitleChange,
   headerAction,
   children,
 }: DashboardCardProps) {
@@ -70,7 +74,17 @@ export function DashboardCard({
         <span className={cn('flex items-center', accent === 'danger' ? 'text-danger' : 'text-accent')}>
           {icon}
         </span>
-        <h3 className="flex-1 truncate text-sm font-semibold text-fg">{title}</h3>
+        {onTitleChange ? (
+          <InlineEdit
+            as="h3"
+            value={title}
+            onChange={onTitleChange}
+            placeholder="Card name"
+            className="flex-1 truncate text-sm font-semibold text-fg"
+          />
+        ) : (
+          <h3 className="flex-1 truncate text-sm font-semibold text-fg">{title}</h3>
+        )}
         {typeof count === 'number' && (
           <span className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[11px] font-medium text-muted">
             {count}

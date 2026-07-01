@@ -6,7 +6,6 @@ import { useStore } from '@/services/store';
 import { DashboardCard } from '@/components/DashboardCard';
 import { SortableList } from '@/components/SortableList';
 import { Input, ProgressBar, EmptyState } from '@/components/ui';
-import { InlineEdit } from '@/components/InlineEdit';
 import { Menu } from '@/components/Menu';
 import { confirm } from '@/components/ConfirmDialog';
 import { cn } from '@/utils/cn';
@@ -41,6 +40,7 @@ export function CustomCardView({ card, ...props }: ModuleCardProps & { card: Cus
     <DashboardCard
       {...props}
       title={card.title}
+      onTitleChange={(title) => patch({ title: title || 'Untitled' })}
       icon={<LayoutList size={16} />}
       count={items.filter((i) => !i.done).length}
       headerAction={
@@ -57,14 +57,6 @@ export function CustomCardView({ card, ...props }: ModuleCardProps & { card: Cus
         />
       }
     >
-      <div className="mb-2 -mt-1">
-        <InlineEdit
-          value={card.title}
-          onChange={(title) => patch({ title: title || 'Untitled' })}
-          className="text-xs font-medium text-muted"
-        />
-      </div>
-
       {items.length > 0 && <ProgressBar value={progress} className="mb-3" />}
 
       <div className="space-y-0.5">

@@ -23,7 +23,11 @@ export function InlineEdit({
 
   useEffect(() => setDraft(value), [value]);
   useEffect(() => {
-    if (editing) ref.current?.focus();
+    if (editing) {
+      // Focus and select all so the user can immediately type to replace the text.
+      ref.current?.focus();
+      ref.current?.select();
+    }
   }, [editing]);
 
   const commit = () => {
